@@ -1,0 +1,266 @@
+.landing-page {
+  padding-top: 100px;
+}
+
+/* Hero Section */
+.hero {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 40px 0;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.text-secondary { color: var(--secondary); }
+.text-primary { color: var(--primary); }
+
+.hero-title {
+  font-size: 4.5rem;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.highlight-glow {
+  text-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin-bottom: 40px;
+}
+
+.btn-main {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 16px 32px;
+  font-size: 1.125rem;
+  border: none;
+}
+
+.btn-glow {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.6);
+  transform: translateY(-2px);
+  color: white;
+}
+
+/* Neural Visual */
+.neural-sphere-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+}
+
+.primary-orb {
+  width: 300px;
+  height: 300px;
+  background: rgba(139, 92, 246, 0.3);
+  top: 10%;
+  right: 20%;
+}
+
+.secondary-orb {
+  width: 250px;
+  height: 250px;
+  background: rgba(6, 182, 212, 0.25);
+  bottom: 20%;
+  left: 10%;
+}
+
+.abstract-card {
+  position: absolute;
+  padding: 20px;
+  width: 280px;
+}
+
+.floating-1 {
+  top: 10%;
+  left: 0;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-2 {
+  top: 45%;
+  right: -5%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+.floating-3 {
+  bottom: 15%;
+  left: 10%;
+  animation: float 7s ease-in-out infinite 1s;
+}
+
+.card-header {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.red { background: #ef4444; }
+.yellow { background: #f59e0b; }
+.green { background: #10b981; }
+
+.skeleton-line {
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  margin-bottom: 12px;
+  width: 80%;
+}
+.skeleton-line.long { width: 100%; }
+.skeleton-line.short { width: 60%; }
+.skeleton-line.full { width: 100%; margin-bottom: 20px; }
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.stat-value {
+  margin-left: auto;
+}
+
+.progress-bar-bg {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+.difficulty-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.difficulty-badge.hard {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* Features Section */
+.features {
+  padding: 100px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  padding: 32px 24px;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--primary-light);
+}
+
+.feature-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+}
+
+.feature-description {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 992px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-subtitle {
+    margin: 0 auto 40px;
+  }
+  .badge {
+    margin: 0 auto 24px;
+  }
+}

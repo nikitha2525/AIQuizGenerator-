@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  quizzes   Quiz[]
+}
+
+model Quiz {
+  id            String    @id @default(uuid())
+  userId        String?
+  user          User?     @relation(fields: [userId], references: [id])
+  title         String
+  sourceType    String    // "topic" | "material"
+  sourceContent String
+  status        String    @default("analyzing") // analyzing | extracting_topics | extracting_concepts | generating_questions | ready | in_progress | completed
+  stage         String    @default("analyzing")
+  progress      Int       @default(0)
+  totalQuestions Int      @default(10)
+  currentIndex  Int       @default(0)
+  difficulty    String    @default("medium")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  questions     Question[]
+  topics        Topic[]
+  concepts      Concept[]
+  attempts      QuizAttempt[]
+  report        PerformanceReport?
+}
+
+model Question {
+  id            String   @id @default(uuid())
+  quizId        String
+  quiz          Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  question      String
+  options       String   // JSON array of 4 option strings
+  correctAnswer Int      // Index 0-3
+  explanation   String
+  topic         String
+  subtopic      String
+  difficulty    String   // easy | medium | hard
+  orderIndex    Int?
+  createdAt     DateTime @default(now())
+  answers       Answer[]
+}
+
+model Topic {
+  id       String    @id @default(uuid())
+  quizId   String
+  quiz     Quiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  name     String
+  concepts Concept[]
+}
+
+model Concept {
+  id      String  @id @default(uuid())
+  quizId  String
+  quiz    Quiz    @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  topicId String?
+  topic   Topic?  @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  name    String
+  mastery Float   @default(50.0)
+}
+
+model QuizAttempt {
+  id             String    @id @default(uuid())
+  quizId         String
+  quiz           Quiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  startedAt      DateTime  @default(now())
+  completedAt    DateTime?
+  totalQuestions Int       @default(0)
+  correctAnswers Int       @default(0)
+  answers        Answer[]
+}
+
+model Answer {
+  id             String      @id @default(uuid())
+  attemptId      String
+  attempt        QuizAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  questionId     String
+  question       Question    @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  selectedAnswer Int
+  isCorrect      Boolean
+  timeSpent      Int?        // milliseconds
+  difficulty     String
+  createdAt      DateTime    @default(now())
+}
+
+model PerformanceReport {
+  id                    String   @id @default(uuid())
+  quizId                String   @unique
+  quiz                  Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  totalQuestions        Int
+  correctAnswers        Int
+  accuracy              Float
+  avgDifficulty         String
+  topicPerformance      String   // JSON object
+  conceptMastery        String   // JSON object
+  strengths             String   // JSON array
+  weaknesses            String   // JSON array
+  difficultyProgression String   // JSON array
+  recommendations       String   // JSON array
+  aiInsight             String
+  createdAt             DateTime @default(now())
+}
